@@ -32,7 +32,8 @@ signed int __fastcall content_type(char *a1)
 ```
 In the above code the content of the variable 'CONTENT_TYPE'  (pointed by the variable haystack) is controlled by a user (through the HTTP request's header). Its content, after the keyword 'boundary', is then copied into a buffer dest, without checking haystacka's length. If one takes a look at the caller function (address 0x1CE6C), one can infer that the size of dest is 256 bytes. As an attacker can control the content of CONTENT_TYPE, she could send the string 'boundary=' followed by as least as 257 characters to trigger a buffer overflow.
 
-Other two similar bugs were found in the same firmware sample, involving the HTTP cookie, as shown below:
+Other two similar bugs were found in the same firmware sample, involving the HTTP cookie. 
+One of them is shown below:
 ```c
 v10 = getenv("HTTP_COOKIE");
   if ( v10 )
@@ -47,4 +48,4 @@ These bugs were reported and confirmed by D-Link.
 
 
 ### DIR-868L, DIR-890L, DIR-885L and DIR-895L
-These firmware samples present a similar structure as DIR-880L and have bugs related to the same HTTP fields.
+These firmware samples present a similar structure as DIR-880L and have the same bugs related to the same HTTP fields.
